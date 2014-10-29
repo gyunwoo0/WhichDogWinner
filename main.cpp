@@ -1,7 +1,7 @@
 
 
 // 1. 보고서 멋지게 나오게 하기 그래프
-// 2. 다른날짜 기록도 볼수 있게 하기
+// 2. 트레이 아이콘 팝업 메뉴 통해서 일별로 볼수 있게 하기
 //
 
 
@@ -297,7 +297,7 @@ void ReportResult(void)
 	_snprintf(report,4096, "%s Total action : %d\n", report, pLoghead->dwNumberofentity-1);
 
 	TRACELOGDATA trRank[1024]={0,};
-	DWORD k=0;
+	DWORD k=0, totalUse = 0;
 	for(int i=1; i < pLoghead->dwNumberofentity; i++) // 뭐했는지 취합하는 곳
 	{	// Dat에 뭐가 있는지 처음부터 조사하면서
 		BOOL bExist = FALSE;
@@ -313,12 +313,14 @@ void ReportResult(void)
 			memcpy(&trRank[k], &pDat[i], sizeof(TRACELOGDATA));
 			k++;
 		}
+		totalUse += pDat[i].inc;
 		//_snprintf(report,2048, "%s %s (%d sec)\n", report, pDat[i].act, pDat[i].time.wSecond);	// Debugging 용
 	}
 	//OutputDebugString(report); // Debugging 용
 
 	memset(report, 0, sizeof(report));
 	_snprintf(report,4096, "================ Rank ================\n");
+	_snprintf(report,4096, "총 %d분 사용\n", totalUse/60);
 
 	DWORD rankIndex[1000];	// 1에서 1000등까지의 인덱스를 배열로 저장
 	DWORD temp=0;
