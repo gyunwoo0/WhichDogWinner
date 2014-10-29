@@ -107,7 +107,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		// 트레이아이콘의 이벤트를 전송받을 메시지 타입정의
 		nid.uCallbackMessage = TRAY_NOTIFY;
 		nid.hIcon = LoadIcon(g_hInst, MAKEINTRESOURCE(IDI_ICON1));
-		strcpy(nid.szTip,"나는 어떤 개에게 먹이를 많이 주나??");
+		strcpy(nid.szTip,"먹이를 많이 준개가 많이 크죠.");
 		// 윈도우 쉘 관리자에게 nid의 정보를 가지는 트레이 아이콘을 등록함을 알린다.
 		Shell_NotifyIcon(NIM_ADD, &nid);
 
@@ -345,6 +345,6 @@ void ReportResult(void)
 			trRank[rankIndex[i]].inc);
 	}
 
-	MessageBox(NULL, report, "당신이 먹이를 많이 준 개", MB_OK);
+	MessageBox(NULL, report, "결과", MB_OK);
 	
 }
